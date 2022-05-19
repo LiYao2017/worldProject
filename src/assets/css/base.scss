@@ -1,0 +1,30 @@
+/* 按钮颜色 边框 + 字体 */
+$bord-color: #622E24;
+$bord-text-color:#300;
+$color_red:#C33;
+$color_glay333:#333;
+$color_666633:#663;
+$color_6f7336:#6f7336;
+
+#cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 18888;
+    background-color: #000;
+    opacity: 0.7;
+    width: 100%;
+    height: 100%
+}
+
+#shareTC {
+    position: fixed;
+    right: 31px;
+    top: 23px;
+    z-index: 19999;
+}
+
+#shareTC img {
+    width: 229px;
+    height: 118px;
+}
