@@ -28,16 +28,8 @@ if (isHD) {
 const projectName = process.argv[process.argv.length - 1];
 const projectPath = `src/${projects}/${projectName}`;
 process.env.VUE_APP_NAME = projectName;
-const {
-  publicPath,
-  outputDir,
-  isGizp,
-  isAnalyze,
-  devServer,
-  staticConfig,
-  isvConsole,
-  filename
-} = require(`./src/${projects}/${projectName}/config`).config;
+const { publicPath, outputDir, isGizp, isAnalyze, devServer, staticConfig, isvConsole, filename } =
+  require(`./src/${projects}/${projectName}/config`).config;
 function getEntry() {
   var entries = {};
   let template = isPC ? 'public/indexpc.html' : 'public/index.html';
