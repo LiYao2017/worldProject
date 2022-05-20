@@ -15,6 +15,12 @@
 export default {
   name: 'Marquee',
   components: {},
+  props: {
+    delayTime: {
+      type: Number,
+      default: 3
+    }
+  },
   data() {
     return {
       list: [],
@@ -29,7 +35,7 @@ export default {
       this.$api.sinthetizeBroadcast().then((res) => {
         if (res.resp_code === '000000') {
           this.list = res.data || [];
-          this.marqueeTime = this.list.length * 5 + 3 + 's';
+          this.marqueeTime = this.list.length * 5 + this.delayTime + 's';
         }
       });
     }

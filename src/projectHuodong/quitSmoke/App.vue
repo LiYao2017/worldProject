@@ -29,14 +29,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'getShareImg',
-      'getUser',
-      'getInviteId',
-      'getAuth',
-      'getChannelId',
-      'getBackups'
-    ])
+    ...mapGetters(['getUser'])
   },
   watch: {
     $route(val, oldval) {
@@ -45,31 +38,13 @@ export default {
   },
   created() {
     this.activitytime();
-    // 是否是二级域名 以及 是否是被邀请注册的
-    _utils.getUrlParam('getBackups') && this.SET_BACK(_utils.getUrlParam('getBackups'));
-    _utils.getUrlParam('inviteId') && this.SET_INVITEID(_utils.getUrlParam('inviteId'));
-    _utils.getUrlParam('channelId') && this.SET_CHANNERL(_utils.getUrlParam('channelId'));
     if (_utils.isEquipment().isWeixin) {
       this.wxShare();
     }
   },
-  mounted() {
-    this.$nextTick(() => {
-      window.getShareInfo = () => {
-        let urls = window.location.origin + window.location.pathname;
-        urls = this.setShareUrl(urls);
-        let data = {
-          title: `打卡解锁读特7.0惊喜之旅 快来抽华为手机、佳明手表！`,
-          content: '新用户注册即送1000读特积分！',
-          url: urls
-        };
-        return JSON.stringify(data);
-      };
-    });
-  },
+  mounted() {},
 
   methods: {
-    ...mapMutations(['SET_BACK', 'SET_INVITEID', 'SET_CHANNERL']),
     activitytime() {
       // 活动是否结束
       let newTime = new Date().getTime();
@@ -88,38 +63,8 @@ export default {
       });
       if (h) this.parentGoApp();
     },
-    parentGoApp(redirect) {
-      // 唤醒
-      let obj = {
-        appid: '',
-        contentid: ''
-      };
-      redirect && Object.prototype.toString.call(redirect) === '[object Function]'
-        ? redirect(obj)
-        : _utils.arouseShare(obj);
-    },
-    setShareUrl(urls = '') {
-      if (this.getAuth) {
-        urls += '?inviteId=' + this.getUser.memberid;
-      } else if (this.getInviteId) {
-        urls += '?inviteId=' + this.getInviteId;
-      }
-      if (this.getChannelId) {
-        urls = urls.includes('?')
-          ? urls + '&channelId=' + this.getChannelId
-          : urls + '?channelId=' + this.getChannelId;
-      }
-
-      if (this.getBackups) {
-        urls = urls.includes('?')
-          ? urls + '&getBackups=' + this.getBackups
-          : urls + '?getBackups=' + this.getBackups;
-      }
-
-      return urls;
-    },
     wxShare() {
-      let urls = this.setShareUrl('/index');
+      let urls = '/index';
       let option = {
         title: `打卡解锁读特7.0惊喜之旅 快来抽华为手机、佳明手表！`,
         desc: '新用户注册即送1000读特积分！',
