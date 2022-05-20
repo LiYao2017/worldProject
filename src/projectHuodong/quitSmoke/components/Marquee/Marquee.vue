@@ -1,5 +1,5 @@
 <template>
-  <div v-if="list.length" class="marquee">
+  <div v-if="list.length > 0" class="marquee">
     <ul class="inc" :style="`--marqueeTime--:${marqueeTime}`">
       <li v-for="item in list" :key="item.id" class="item">
         恭喜
@@ -19,27 +19,22 @@ export default {
     delayTime: {
       type: Number,
       default: 3
+    },
+    list: {
+      default: []
     }
   },
   data() {
-    return {
-      list: [],
-      marqueeTime: '3s'
-    };
+    return {};
   },
-  mounted() {
-    this.fetchList();
-  },
-  methods: {
-    fetchList() {
-      this.$api.sinthetizeBroadcast().then((res) => {
-        if (res.resp_code === '000000') {
-          this.list = res.data || [];
-          this.marqueeTime = this.list.length * 5 + this.delayTime + 's';
-        }
-      });
+  computed: {
+    marqueeTime: function () {
+      return this.list.length * 5 + this.delayTime + 's';
     }
-  }
+  },
+  watch: {},
+  mounted() {},
+  methods: {}
 };
 </script>
 
