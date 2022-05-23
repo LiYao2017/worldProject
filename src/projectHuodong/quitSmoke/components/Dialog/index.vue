@@ -337,7 +337,7 @@ export default {
 
   .draw_title_bg {
     position: relative;
-    background-image: imgurl('winner_tip_title.png');
+    // background-image: imgurl('winner_tip_title.png');
     background-size: 100% 100%;
     z-index: 1999;
     @include wh(138px, 136px);
@@ -345,7 +345,7 @@ export default {
 
   .draw_other_bg {
     position: relative;
-    background-image: imgurl('winner_tip_other.png');
+    // background-image: imgurl('winner_tip_other.png');
     background-size: 100% 100%;
     margin: 0 auto;
     z-index: 1999;
@@ -379,7 +379,7 @@ export default {
 }
 
 .thanks_icon {
-  background-image: imgurl('subwayCloneIn_thanks_icon.png');
+  // background-image: imgurl('subwayCloneIn_thanks_icon.png');
   background-size: 100% 100%;
   margin: 0 auto 8px;
   z-index: 1999;
@@ -387,7 +387,7 @@ export default {
 }
 
 .close_mask {
-  background-image: imgurl('close_mask.png');
+  // background-image: imgurl('close_mask.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   width: 25px;

@@ -23,19 +23,9 @@ module.exports.config = {
   },
   // axios的baseUrl
   baseURL: {
-    development: {
-      rootUrl: 'https://hd-api.szdute.cn',
-      pageUrl: 'https://hd-api.szdute.cn/gateway/pgc'
-    },
-    test: {
-      rootUrl: 'https://hd-api.szdute.cn',
-      pageUrl: 'https://hd-api.szdute.cn/gateway/pgc'
-    },
-    production: {
-      rootUrl: 'https://hd-api.dutenews.com',
-      pageUrl: 'https://hd-api.dutenews.com/gateway/pgc'
-    },
-    isProay: true //当为true时，表示有多个域名服务器接口
+    development: 'http://172.20.109.155:7150',
+    test: 'https://www.lq214xh.top',
+    production: 'https://www.lq214xh.top'
   },
   // 分享icon
   shareImg: {
@@ -51,9 +41,9 @@ module.exports.config = {
   },
   imgUrl: {
     // 静态资源的url地址
-    development: 'https://h5-img.szdute.cn/images/',
-    test: 'https://h5-img.szdute.cn/images/',
-    production: 'https://h5-img.dutenews.com/images/'
+    development: 'https://300w.oss-cn-shenzhen.aliyuncs.com/quitSmoke/',
+    test: 'https://300w.oss-cn-shenzhen.aliyuncs.com/quitSmoke/',
+    production: 'https://300w.oss-cn-shenzhen.aliyuncs.com/quitSmoke/'
   },
   isvConsole: true,
   devServer: {

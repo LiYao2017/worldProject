@@ -185,7 +185,7 @@ let util = {
     urlss = option.link ? `${protocolStr}//${ip}${UTLPATH}${option.link}` : window.location.href;
     let shareUrlImg = option.shareUrlImg
       ? `${SHAREUTLIMG}${option.shareUrlImg}`
-      : `${SHAREUTLIMG}dute_share_tip.png`;
+      : `${SHAREUTLIMG}share_jiantou_act.png`;
     if (_that.isEquipment().isWeixin) {
       //微信的分享
 
@@ -315,7 +315,8 @@ let util = {
           Reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
           break;
         case 'identity':
-          Reg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+          Reg =
+            /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
           break;
         case 'emailCode':
           Reg = /^\d{6}$/;

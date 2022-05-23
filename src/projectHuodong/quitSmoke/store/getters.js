@@ -16,7 +16,7 @@ export default {
       return localStorage.getItem('subwayCloneIn_user') || {};
     }
   },
-  getLeaveWords(state, ind = 0) {
-    return state.leaveWords[ind];
+  getLeaveWords(state) {
+    return state.leaveWords;
   }
 };

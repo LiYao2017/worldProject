@@ -1,7 +1,10 @@
 <template>
   <div class="luckMain">
-    <Marquee class="luckMarquee" :list="list" :delayTime="3"></Marquee>
-    <Marquee class="luckMarqueeTwo" :list="list" :delayTime="10"></Marquee>
+    <Marquee class="luckMarquee" :list="list.slice(0, 13)" :delayTime="3"></Marquee>
+    <Marquee class="luckMarquee_2" :list="list.slice(14, 26)" :delayTime="10"></Marquee>
+    <Marquee class="luckMarquee_3" :list="list.slice(27, 40)" :delayTime="5"></Marquee>
+    <Marquee class="luckMarquee_4" :list="list.slice(41, 53)" :delayTime="8"></Marquee>
+    <MainIndex v-if="isMain" @setWxSq="setWxSq" @fetchList="fetchList"></MainIndex>
 
     <Dialog :options="diaOptions" :value="diaOptions.show" @btnClick="btnClick"></Dialog>
   </div>
@@ -9,14 +12,16 @@
 
 <script>
 import _utils from '_utils/utils.js';
+import MainIndex from 'components/mainIndex/index.vue';
 import Marquee from 'components/Marquee/Marquee.vue';
 import Dialog from 'components/Dialog/index.vue';
 import { mapMutations, mapGetters } from 'vuex';
 export default {
   name: 'luckMain',
-  components: { Marquee, Dialog },
+  components: { Marquee, Dialog, MainIndex },
   data() {
     return {
+      isMain: true,
       list: [],
       marqueeObj: [],
       diaOptions: {
@@ -29,11 +34,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getUser'])
+    ...mapGetters(['getUser', 'getLeaveWords'])
   },
   created() {
     this.activitytime();
-    this.fetchList();
   },
   mounted() {
     // _utils.isEquipment().isWeixin && this.getCode();  授权
@@ -43,17 +47,27 @@ export default {
     btnClick() {},
 
     fetchList() {
-      this.$api.sinthetizeBroadcast().then((res) => {
-        if (res.resp_code === '000000') {
-          let list = res.data || [];
+      this.$api.getRecordList().then((res) => {
+        if (res.success) {
+          console.log(this.getLeaveWords);
+          res.data.forEach((item) => {
+            item.liuyan = this.getLeaveWords[item.commentId];
+          });
+          this.list = res.data || [];
         }
       });
     },
     //获取微信授权
+    setWxSq() {
+      if (this.getUser && this.getUser.nickname) {
+        this.isMain = false;
+      } else {
+        _utils.isEquipment().isWeixin && this.getCode();
+      }
+    },
     getCode() {
-      let ip = window.location.host; //获取服务器ip地址
       let loaduRL = window.location.href;
-      let appid = ip.includes('szdute') ? 'wxf4197e232847acfc' : 'wx66e963a931f9fbf9';
+      let appid = 'wxfa0e465fd80ff6e4';
       let wx_url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${loaduRL}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
       window.location.href = wx_url;
     },
@@ -62,8 +76,7 @@ export default {
         code: this.code
       };
       this.$api.wxLogin(data).then((res) => {
-        console.log(res);
-        if (res.result) {
+        if (res.success) {
           let user = {
             nickname: res.userinfo.nickname,
             avatar: res.userinfo.headimgurl
@@ -79,6 +92,7 @@ export default {
       let num = url.indexOf('code=');
       if (num > 0) {
         URL = url.substring(0, num - 1);
+        URL += URL + '?quitSmokeView=1';
         window.history.replaceState(null, null, URL);
       }
     },

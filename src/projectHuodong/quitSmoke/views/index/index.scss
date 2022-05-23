@@ -4,19 +4,32 @@
     background-color: #F24A22;
     height: 100vh;
     padding-bottom: 20px;
-    background-image: imgurl('subwayCloneIn_main_bj_s.png?v_=2');
+    // background-image: imgurl('subwayCloneIn_main_bj_s.png?v_=2');
     background-size: 100% 650px;
     background-repeat: no-repeat;
 
     .luckMarquee {
-        top: 16px;
+        top: 8%;
         z-index: 9;
         bottom: inherit;
+
+        &_2 {
+            top: calc(8% + 33px);
+            z-index: 9;
+            bottom: inherit;
+        }
+
+        &_3 {
+            top: calc(8% + 66px);
+            z-index: 9;
+            bottom: inherit;
+        }
+
+        &_4 {
+            top: calc(8% + 99px);
+            z-index: 9;
+            bottom: inherit;
+        }
     }
 
-    .luckMarqueeTwo {
-        top: 56px;
-        z-index: 9;
-        bottom: inherit;
-    }
 }

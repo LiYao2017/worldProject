@@ -1,17 +1,17 @@
 <template>
   <div v-if="list.length > 0" class="marquee">
     <ul class="inc" :style="`--marqueeTime--:${marqueeTime}`">
-      <li v-for="item in list" :key="item.id" class="item">
-        恭喜
-        <span class="marColor" v-text="item.memberName"></span>
-        抽中了
-        <span class="marColor" v-text="item.prizeName"></span>
+      <li v-for="(item, ind) in list" :key="ind" class="item">
+        <span v-text="item.nickname"></span>
+        :
+        <span v-html="item.liuyan"></span>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'Marquee',
   components: {},
@@ -28,8 +28,9 @@ export default {
     return {};
   },
   computed: {
+    ...mapGetters(['getLeaveWords']),
     marqueeTime: function () {
-      return this.list.length * 5 + this.delayTime + 's';
+      return this.list.length * 3 + this.delayTime + 's';
     }
   },
   watch: {},
@@ -44,8 +45,13 @@ export default {
   left: 0;
   right: 0;
   bottom: 21.5%;
-  font-size: 12.5px;
+  font-size: 13px;
   color: #fff;
+
+  /deep/ .liuyanIcon {
+    vertical-align: middle;
+    @include wh(20px, 20px);
+  }
 
   .inc {
     position: absolute;
@@ -66,10 +72,10 @@ export default {
   }
 
   .item {
-    background: rgba(00, 00, 00, 0.6);
-    border-radius: 16px;
-    line-height: 22.5px;
-    height: 22.5px;
+    background: linear-gradient(270deg, #6c9a65, #9dcc97);
+    border-radius: 12px;
+    line-height: 24px;
+    height: 24px;
     margin-left: 16.5px;
     margin-right: 16.5px;
     padding: 0 15px;
