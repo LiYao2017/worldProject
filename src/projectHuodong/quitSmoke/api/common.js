@@ -24,5 +24,11 @@ export default {
   },
   wxLogin(data) {
     return http.get('/activity/api/wx/getUserInfo', data);
+  },
+  setRecordSave(data) {
+    return http.post('/activity/api/record/save', data);
+  },
+  getIncreasing() {
+    return http.get('/activity/api/increasing');
   }
 };

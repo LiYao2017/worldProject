@@ -19,15 +19,6 @@ Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key]);
 });
 
-// const files = require.context('@/directives', true, /\.js$/);
-// files.keys().forEach((key) => {
-//   const moduleName = key
-//     .split('/')
-//     .pop()
-//     .replace(/\.\w+$/, '');
-//   Vue.directive(moduleName, files(key).default);
-// });
-
 new Vue({
   router,
   store,

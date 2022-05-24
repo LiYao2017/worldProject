@@ -1,12 +1,30 @@
 <template>
-  <div class="luckMain">
-    <Marquee class="luckMarquee" :list="list.slice(0, 13)" :delayTime="3"></Marquee>
-    <Marquee class="luckMarquee_2" :list="list.slice(14, 26)" :delayTime="10"></Marquee>
-    <Marquee class="luckMarquee_3" :list="list.slice(27, 40)" :delayTime="5"></Marquee>
-    <Marquee class="luckMarquee_4" :list="list.slice(41, 53)" :delayTime="8"></Marquee>
+  <div class="quitMain">
+    <Marquee class="quitMain_que" :list="list.slice(0, 13)" :delayTime="3"></Marquee>
+    <Marquee class="quitMain_que_2" :list="list.slice(14, 26)" :delayTime="10"></Marquee>
+    <Marquee class="quitMain_que_3" :list="list.slice(27, 40)" :delayTime="5"></Marquee>
+    <Marquee class="quitMain_que_4" :list="list.slice(41, 53)" :delayTime="8"></Marquee>
     <MainIndex v-if="isMain" @setWxSq="setWxSq" @fetchList="fetchList"></MainIndex>
 
-    <Dialog :options="diaOptions" :value="diaOptions.show" @btnClick="btnClick"></Dialog>
+    <div class="quitMain_cent">
+      <div class="quitMain_cent_s">
+        <img class="quitMain_avator" :src="getUser.headimgurl" alt="" />
+        <div class="quitMain_nickname">{{ getUser.nickname }}</div>
+        <div class="quitMain_text">
+          我是第
+          <span class="poster_store">{{ getUnmber }}</span>
+          位戒烟倡议者
+        </div>
+      </div>
+    </div>
+
+    <SharePoster ref="SharePoster"></SharePoster>
+    <Dialog
+      :options="diaOptions"
+      :value="diaOptions.show"
+      @actLiuyan="actLiuyan"
+      @btnClick="btnClick"
+    ></Dialog>
   </div>
 </template>
 
@@ -15,13 +33,15 @@ import _utils from '_utils/utils.js';
 import MainIndex from 'components/mainIndex/index.vue';
 import Marquee from 'components/Marquee/Marquee.vue';
 import Dialog from 'components/Dialog/index.vue';
+import SharePoster from 'components/SharePoster/index.vue';
 import { mapMutations, mapGetters } from 'vuex';
 export default {
-  name: 'luckMain',
-  components: { Marquee, Dialog, MainIndex },
+  name: 'quitMain',
+  components: { Marquee, Dialog, MainIndex, SharePoster },
   data() {
     return {
-      isMain: true,
+      isMain: false,
+      code: null,
       list: [],
       marqueeObj: [],
       diaOptions: {
@@ -34,22 +54,41 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getUser', 'getLeaveWords'])
+    ...mapGetters(['getUser', 'getLeaveWords', 'getUnmber'])
   },
   created() {
     this.activitytime();
+
+    if (_utils.getUrlParam('code')) {
+      this.code = _utils.getUrlParam('code');
+      this.userCallback();
+    }
   },
   mounted() {
+    this.fetchList();
     // _utils.isEquipment().isWeixin && this.getCode();  授权
   },
   methods: {
     ...mapMutations(['SET_USER']),
-    btnClick() {},
-
+    actLiuyan(ind) {
+      let data = {
+        nickname: this.getUser.nickname,
+        headimgurl: this.getUser.headimgurl,
+        commentId: ind,
+        number: this.getUnmber
+      };
+      this.$api.setRecordSave(data).then(() => {
+        this.diaOptions.show = false;
+      });
+    },
+    btnClick(val) {
+      if (val === 'close') {
+        this.diaOptions.show = false;
+      }
+    },
     fetchList() {
       this.$api.getRecordList().then((res) => {
         if (res.success) {
-          console.log(this.getLeaveWords);
           res.data.forEach((item) => {
             item.liuyan = this.getLeaveWords[item.commentId];
           });
@@ -72,6 +111,7 @@ export default {
       window.location.href = wx_url;
     },
     userCallback() {
+      this.isMain = false;
       let data = {
         code: this.code
       };
@@ -79,7 +119,7 @@ export default {
         if (res.success) {
           let user = {
             nickname: res.userinfo.nickname,
-            avatar: res.userinfo.headimgurl
+            headimgurl: res.userinfo.headimgurl
           };
           this.SET_USER(user);
           this.restUrl();

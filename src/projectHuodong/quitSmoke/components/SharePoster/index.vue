@@ -1,35 +1,31 @@
 <template>
-  <div v-show="modeImgShare" class="mask">
+  <div v-show="modeImgShare" class="posterMask">
     <van-loading v-show="process === 1" class="posterLoading" color="#fff" size="24px" vertical>
       海报生成中
     </van-loading>
     <div v-show="process === 2" class="poster">
-      <img class="poster_img" :src="posterImg" alt="" srcset="" />
-      <p class="poset_tips_text">长按或截图分享给好友</p>
-      <div class="close_mask" @click="modeImgShare = false"></div>
+      <img class="poster_poster" :src="posterImg" alt="" srcset="" />
     </div>
+
     <div ref="imageWrapperShare" class="poster_canvas">
-      <img class="poster_title" src="@/assets/images/poster_title.png?v_=2" />
-
-      <img v-if="options.avatar" class="poster_avatar" :src="picture" alt="" srcset="" />
-      <img v-else class="poster_avatar" src="@/assets/images/subwayCloneIn_avary.png?v_=1" alt="" />
-
-      <div class="poster_nickname">{{ getUser.nickname }}</div>
-      <p class="poster_tips">
-        我在读特APP抽中了
-        <span class="prize_tag">{{ options.tag }}</span>
-        <br />
-        你也快来一起参与吧
-      </p>
-      <img
-        class="prize_img"
-        :src="prizeList[options.prizeImageId] && prizeList[options.prizeImageId]['icon']"
-        alt=""
-        srcset=""
-      />
-      <div class="poster_bottom">
-        <img class="poster_aside" src="@/assets/images/poster_aside.png" />
-        <div id="qrcodes"></div>
+      <img class="poster_left_top" src="@/assets/images/quitSmoke_lvye.png" alt="" />
+      <div class="poster_cent">
+        <img class="poster_avator" src="@/assets/images/quitSmoke_nan_icon.png" alt="" />
+        <div class="poster_nickname">{{ getUser.nickname }}</div>
+        <div class="poster_text">
+          我是第
+          <span class="poster_store">{{ getUnmber }}</span>
+          位戒烟倡议者
+        </div>
+        <!-- <img class="poster_img" :src="picture" alt="" /> -->
+        <img class="poster_img" src="@/assets/images/quitSmoke_nan_icon.png" alt="" />
+        <div class="poster_tip">为了孩子的明天，请戒烟</div>
+      </div>
+      <div class="poster_footer">
+        <div class="poster_qrcode">
+          <div id="qrcodes" class="poster_s"></div>
+          <img class="poster_s_img" src="@/assets/images/quitSmoke_sb_icon.png" alt="" />
+        </div>
       </div>
     </div>
   </div>
@@ -39,11 +35,6 @@
 import QRCode from 'qrcodejs2';
 import html2canvas from 'html2canvas';
 import { mapGetters } from 'vuex';
-
-import hb_1 from '@/assets/images/subwayCloneIn_hb_1.png';
-import hb_2 from '@/assets/images/subwayCloneIn_hb_2.png';
-import hb_3 from '@/assets/images/subwayCloneIn_hb_3.png';
-import hb_4 from '@/assets/images/subwayCloneIn_hb_4.png';
 export default {
   props: {
     /**
@@ -64,52 +55,20 @@ export default {
   data() {
     return {
       shareUrl: '',
-      process: 0, // 1:海报生成中;2:海报生成完毕
+      process: 1, // 1:海报生成中;2:海报生成完毕
       posterImg: '',
       picture: '', //头像的图片
-      modeImgShare: false,
-      prizeList: [
-        {
-          name: '华为nova9手机',
-          icon: hb_1
-        },
-        {
-          name: '佳明时尚手表',
-          icon: hb_2
-        },
-        {
-          name: '乐扣保温杯',
-          icon: hb_3
-        },
-        {
-          name: '小米电动牙刷',
-          icon: hb_4
-        }
-      ]
+      modeImgShare: false
     };
   },
   computed: {
-    ...mapGetters(['getAuth', 'getUser', 'getBackups', 'getIsApp', 'getUuid'])
+    ...mapGetters(['getUser', 'getUnmber'])
   },
+  mounted() {},
   methods: {
     qrcode(url) {
       //生成的二维码
-      let urls = window.location.origin + window.location.pathname;
-      if (this.getAuth) {
-        urls += '?inviteId=' + this.getUser.memberid;
-      }
-      if (this.getChannelId) {
-        urls = urls.includes('?')
-          ? urls + '&channelId=' + this.getChannelId
-          : urls + '?channelId=' + this.getChannelId;
-      }
-
-      if (this.getBackups) {
-        urls = urls.includes('?')
-          ? urls + '&getBackups=' + this.getBackups
-          : urls + '?getBackups=' + this.getBackups;
-      }
-      this.shareUrl = this.options.shareUrl || urls;
+      this.shareUrl = this.options.shareUrl || window.location.href;
       let qrcode = new QRCode('qrcodes', {
         width: 90,
         height: 90, // 高度
@@ -128,20 +87,14 @@ export default {
       this.modeImgShare = true;
       await this.qrcode();
 
-      if (this.options.avatar) {
-        await this.getImage(this.options.avatar);
-        return;
-      }
+      // if (this.getUser.headimgurl) {
+      //   await this.getImage(this.getUser.headimgurl);
+      //   return;
+      // }
 
       setTimeout(() => {
         this.createImg();
-      }, 350);
-
-      // await this.getImage(
-      //   this.options.avatar || 'https://h5-img.szdute.cn/images/setTiget_myde_avary.png'
-      // );
-
-      // this.$emit('operateLog', 'poster');
+      }, 300);
     },
     createImg() {
       let that = this;
@@ -151,7 +104,7 @@ export default {
       html2canvas(post, {
         taintTest: false,
         useCORS: true,
-        backgroundColor: 'rgba(00,00,00,0)',
+        backgroundColor: '#dbecc0',
         width: width,
         height: height,
         scale: window.devicePixelRatio
@@ -219,128 +172,85 @@ export default {
   transform: translate(-50%, -50%);
 }
 
-.mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(00, 00, 00, 0.8);
-  z-index: 99;
-}
-
 .poster {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 4px;
-  width: 255px;
-}
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
 
-.poster_img {
-  @include wh(250px, 445px);
-}
+  &_poster {
+    @include wh(100%);
+  }
 
-.poster_canvas {
-  position: absolute;
-  left: -150%;
-  top: -150%;
-  //   top: 50%;
-  // left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 4px;
-  background: #fff;
-  @include wh(375px, 667px);
-  // display: none;
-}
+  &_canvas {
+    position: absolute;
+    left: -150%;
+    top: -150%;
+    background: #dbecc0;
+    line-height: 25px;
+    @include wh(100%);
+    @include sc(15px, #3e322e);
+  }
 
-.poster_title {
-  position: relative;
-  z-index: 99;
-  @include wh(375px, 199px);
-}
+  &_left_top {
+    position: absolute;
+    left: 0;
+    top: 0;
+    @include wh(110px, 109px);
+  }
 
-.poster_avatar {
-  width: 50px;
-  height: 50px;
-  border: 1px solid #fff;
-  border-radius: 50%;
-  margin: -25px auto 0;
-  display: block;
-  position: relative;
-  z-index: 100;
-}
+  &_cent {
+    margin-top: 55px;
+    text-align: center;
+  }
 
-.poster_nickname {
-  margin-top: 6px;
-  font-weight: 400;
-  line-height: 20px;
-  text-align: center;
-  @include sc(14px, #666);
-}
+  &_avator {
+    @include wh(102px, 102px);
+  }
 
-.poster_tips {
-  margin-top: 16px;
-  color: #333;
-  line-height: 30px;
-  font-weight: 600;
-  text-align: center;
-  @include sc(20px, #333);
-}
+  &_store {
+    color: #c15858;
+  }
 
-.prize_tag {
-  background-image: url('~@/assets/images/prize_name_bg.png');
-  background-size: 100% 100%;
-  display: inline-block;
-  text-align: center;
-  font-weight: 600;
-  line-height: 30px;
-  padding: 0 15px;
-  height: 29px;
-  @include sc(19px, #fff);
-}
+  &_img {
+    margin: 5px 0;
+    @include wh(59px, 55px);
+  }
 
-.prize_img {
-  width: 200px;
-  height: 200px;
-  display: block;
-  margin: 8px auto 0;
-}
+  &_tip {
+    @include sc(16px, #686b64);
+  }
 
-.poster_bottom {
-  margin-top: 12px;
-  padding: 0 24px 0 18px;
-  display: flex;
-  justify-content: space-between;
-}
+  &_footer {
+    position: relative;
+    background-image: url('~@/assets/images/quitSmoke_ditus.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include wh(375px, 319px);
+  }
 
-.poster_aside {
-  // background-image: imgurl('poster_aside.png');
-  // background-size: 100% 100%;
-  @include wh(194px, 92px);
-}
+  &_qrcode {
+    position: absolute;
+    bottom: 10px;
+    right: 46px;
+  }
 
-#qrcodes {
-  margin-top: 6px;
-  @include wh(86px, 86px);
-}
+  &_s {
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #fff;
+    @include wh(76px, 76px);
+  }
 
-.poset_tips_text {
-  margin-top: 16px;
-  margin-bottom: 18px;
-  text-align: center;
-  font-size: 16px;
-  line-height: 23px;
-  color: rgba(255, 255, 255, 0.1);
-}
-
-.close_mask {
-  background-image: url('~@/assets/images/close_mask.png');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 25px;
-  height: 25px;
-  margin: 0 auto;
+  &_s_img {
+    background-image: url('~@/assets/images/quitSmoke_sb_icon.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    @include wh(69px, 34px);
+  }
 }
 </style>

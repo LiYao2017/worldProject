@@ -1,14 +1,15 @@
-.luckMain {
-    position: relative;
-    box-sizing: border-box;
-    background-color: #F24A22;
-    height: 100vh;
-    padding-bottom: 20px;
-    // background-image: imgurl('subwayCloneIn_main_bj_s.png?v_=2');
-    background-size: 100% 650px;
-    background-repeat: no-repeat;
+.quitMain{
+    &_cent{
+        background-color: #dbecc0;
+        background-image: imgurl('quitSmoke_bg_ottom.png');
+        background-position: left bottom;
+        background-repeat: no-repeat;
+        background-size: 100% 163px;
+        position: relative;
+        @include wh(100wh, 100vh);
+    }
 
-    .luckMarquee {
+    &_que {
         top: 8%;
         z-index: 9;
         bottom: inherit;
@@ -30,6 +31,27 @@
             z-index: 9;
             bottom: inherit;
         }
+    }
+
+    &_cent_s {
+        position: absolute;
+        width: 100%;
+        top: 228px;
+        text-align: center;
+        font-weight: 600;
+        @include sc(16px, #3E322E);
+    }
+
+    &_avator {
+        @include wh(121px, 121px);
+    }
+
+    &_nickname{
+        margin: 15px 0 16px 0;
+    }
+
+    &_store {
+        color: #C15858;
     }
 
 }

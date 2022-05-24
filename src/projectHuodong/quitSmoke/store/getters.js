@@ -18,5 +18,8 @@ export default {
   },
   getLeaveWords(state) {
     return state.leaveWords;
+  },
+  getUnmber(state) {
+    return state.unmber;
   }
 };

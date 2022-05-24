@@ -35,9 +35,9 @@ module.exports.config = {
   },
   shareWxUrl: {
     //微信授权的接口地址
-    development: 'https://m.szdute.cn/ajax/wechatConfig',
-    test: 'https://m.szdute.cn/ajax/wechatConfig',
-    production: 'https://m.dutenews.com/ajax/wechatConfig'
+    development: 'https://www.lq214xh.top/activity/api/wx/getSignature',
+    test: 'https://www.lq214xh.top/activity/api/wx/getSignature',
+    production: 'https://www.lq214xh.top/activity/api/wx/getSignature'
   },
   imgUrl: {
     // 静态资源的url地址

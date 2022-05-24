@@ -1,3 +1,4 @@
+import api from '@/api/common';
 export default {
   SET_COMMIT_USER({ commit }, callback) {
     //获取用户信息，传值callback 为函数
@@ -17,5 +18,12 @@ export default {
         }
       });
     }, 10);
+  },
+  SET_NUMBER({ commit }, callback) {
+    api.getIncreasing().then((res) => {
+      if (res.success) {
+        commit('SET_UNMBER', res.data);
+      }
+    });
   }
 };

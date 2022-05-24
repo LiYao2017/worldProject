@@ -9,7 +9,7 @@
 import _utils from '_utils/utils.js';
 import Dialog from 'components/Dialog/index.vue';
 import Scroll from '_c/scrollView/index.vue';
-import { mapMutations, mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'App',
   components: { Dialog, Scroll },
@@ -37,6 +37,7 @@ export default {
     }
   },
   created() {
+    this.SET_NUMBER();
     this.activitytime();
     if (_utils.isEquipment().isWeixin) {
       this.wxShare();
@@ -45,6 +46,7 @@ export default {
   mounted() {},
 
   methods: {
+    ...mapActions(['SET_NUMBER']),
     activitytime() {
       // 活动是否结束
       let newTime = new Date().getTime();

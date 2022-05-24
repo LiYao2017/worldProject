@@ -1,6 +1,10 @@
 import _utils from '_utils/utils.js';
 let state = {
-  user: {},
+  user: {
+    headimgurl: 'https://300w.oss-cn-shenzhen.aliyuncs.com/quitSmoke/quitSmoke_nan_icon.png',
+    nickname: '尧先生'
+  },
+  unmber: 0, //人数
   leaveWords: [
     '希望老爸能尽快戒烟，我想多陪陪他',
     '办公室内抽烟很讨厌，拒绝二手烟',
