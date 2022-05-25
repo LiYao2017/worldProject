@@ -22,6 +22,14 @@ $color_6f7336:#6f7336;
     right: 26px;
     top: 23px;
     z-index: 19999;
+    
+    .tip{
+        color: #fff;
+        font-size: 13px;
+        margin-top: 6px;
+        position: relative;
+        left: -40px;
+    }
 }
 
 #shareTC img {

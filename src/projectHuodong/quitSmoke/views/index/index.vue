@@ -1,24 +1,32 @@
 <template>
   <div class="quitMain">
-    <Marquee class="quitMain_que" :list="list.slice(0, 13)" :delayTime="3"></Marquee>
+    <Marquee v-if="isReset" class="quitMain_que" :list="list.slice(0, 13)" :delayTime="3"></Marquee>
     <Marquee class="quitMain_que_2" :list="list.slice(14, 26)" :delayTime="10"></Marquee>
     <Marquee class="quitMain_que_3" :list="list.slice(27, 40)" :delayTime="5"></Marquee>
     <Marquee class="quitMain_que_4" :list="list.slice(41, 53)" :delayTime="8"></Marquee>
     <MainIndex v-if="isMain" @setWxSq="setWxSq" @fetchList="fetchList"></MainIndex>
 
-    <div class="quitMain_cent">
+    <div v-show="!isMain" class="quitMain_cent">
       <div class="quitMain_cent_s">
         <img class="quitMain_avator" :src="getUser.headimgurl" alt="" />
         <div class="quitMain_nickname">{{ getUser.nickname }}</div>
         <div class="quitMain_text">
           我是第
-          <span class="poster_store">{{ getUnmber }}</span>
+          <span class="quitMain_store">{{ getUnmber }}</span>
           位戒烟倡议者
+        </div>
+        <div class="quitMain_poster_tip">
+          {{ isPoster ? '长按保存海报至相册' : ' 海报正在生成中...' }}
+        </div>
+
+        <div class="quitMain_btn_s">
+          <div class="quitMain_btn_a" @click="getShare"></div>
+          <div class="quitMain_btn_b" @click="setLiuyan"></div>
         </div>
       </div>
     </div>
 
-    <SharePoster ref="SharePoster"></SharePoster>
+    <SharePoster ref="SharePoster" @setPoster="setPoster"></SharePoster>
     <Dialog
       :options="diaOptions"
       :value="diaOptions.show"
@@ -40,16 +48,17 @@ export default {
   components: { Marquee, Dialog, MainIndex, SharePoster },
   data() {
     return {
-      isMain: false,
+      isMain: true,
       code: null,
+      isReset: false, //重置弹幕第一行
       list: [],
       marqueeObj: [],
       diaOptions: {
         //弹框控制
         drawState: 1,
-        metroName: '',
         show: false
       },
+      isPoster: false,
       activityEnd: false
     };
   },
@@ -62,11 +71,11 @@ export default {
     if (_utils.getUrlParam('code')) {
       this.code = _utils.getUrlParam('code');
       this.userCallback();
+      this.fetchList();
     }
   },
   mounted() {
-    this.fetchList();
-    // _utils.isEquipment().isWeixin && this.getCode();  授权
+    // this.fetchList();
   },
   methods: {
     ...mapMutations(['SET_USER']),
@@ -77,9 +86,47 @@ export default {
         commentId: ind,
         number: this.getUnmber
       };
-      this.$api.setRecordSave(data).then(() => {
-        this.diaOptions.show = false;
+      this.isReset = false;
+      this.$refs.SharePoster.resetPoster();
+      this.$api.setRecordSave(data).then((res) => {
+        if (res.success) {
+          this.diaOptions.show = false;
+          let data = {
+            nickname: this.getUser.nickname,
+            liuyan: this.getLeaveWords[ind]
+          };
+          this.list.unshift(data);
+          this.isPoster = false;
+          this.$refs.SharePoster.getPoster();
+        }
+        this.isReset = true;
       });
+    },
+    setLiuyan() {
+      this.diaOptions.drawState = 1;
+      this.diaOptions.show = true;
+    },
+    setPoster() {
+      this.isPoster = true;
+    },
+    getShare() {
+      //分享
+      let _this = this;
+      let option = {
+        title: `烟烟一熄，生生不息`,
+        desc: '龙岗神秘网红店开张，快闪一天等您探店',
+        link: '/index',
+        shareClick: true,
+        shareCallback: function () {
+          _this.diaOptions.drawState = 2;
+          _this.diaOptions.show = true;
+        },
+        callback: function (e) {
+          console.log('分享', e);
+        }
+      };
+
+      _utils.isEquipment().isWeixin && _utils.getH5Share(option);
     },
     btnClick(val) {
       if (val === 'close') {
@@ -93,6 +140,7 @@ export default {
             item.liuyan = this.getLeaveWords[item.commentId];
           });
           this.list = res.data || [];
+          this.isReset = true;
         }
       });
     },
@@ -100,6 +148,7 @@ export default {
     setWxSq() {
       if (this.getUser && this.getUser.nickname) {
         this.isMain = false;
+        this.$refs.SharePoster.getPoster();
       } else {
         _utils.isEquipment().isWeixin && this.getCode();
       }
@@ -118,11 +167,12 @@ export default {
       this.$api.wxLogin(data).then((res) => {
         if (res.success) {
           let user = {
-            nickname: res.userinfo.nickname,
-            headimgurl: res.userinfo.headimgurl
+            nickname: res.data.nickname,
+            headimgurl: res.data.headimgurl
           };
           this.SET_USER(user);
           this.restUrl();
+          this.$refs.SharePoster.getPoster();
         }
       });
     },
@@ -132,7 +182,7 @@ export default {
       let num = url.indexOf('code=');
       if (num > 0) {
         URL = url.substring(0, num - 1);
-        URL += URL + '?quitSmokeView=1';
+        URL = URL + '?quitSmokeView=1';
         window.history.replaceState(null, null, URL);
       }
     },

@@ -1,6 +1,6 @@
 /*
  * @Description: prettier规范
- * @Autor: huoyou
+ * @Autor: liYao
  * @Date: 2021-06-10 15:23:26
  * @LastEditTime: 2021-06-10 18:19:22
  */

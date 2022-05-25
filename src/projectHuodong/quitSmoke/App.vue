@@ -66,12 +66,10 @@ export default {
       if (h) this.parentGoApp();
     },
     wxShare() {
-      let urls = '/index';
       let option = {
-        title: `打卡解锁读特7.0惊喜之旅 快来抽华为手机、佳明手表！`,
-        desc: '新用户注册即送1000读特积分！',
-        content: '新用户注册即送1000读特积分！',
-        link: urls
+        title: `烟烟一熄，生生不息`,
+        desc: '龙岗神秘网红店开张，快闪一天等您探店',
+        link: '/index'
       };
       _utils.isEquipment().isWeixin && _utils.getLoader(this.$route.fullPath, option);
     }
@@ -86,7 +84,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: auto;
-  -webkit-overflow-scrolling: touch;
   height: 100vh;
   min-height: 460px;
 }
@@ -100,72 +97,13 @@ button {
   background: none;
 }
 
-.modelCanvas {
-  position: absolute;
-  left: -150%;
-  top: -150%;
-  width: 100%;
-
-  .modeContents {
-    background-color: #fff;
-    @include wh(319px, 455px);
-
-    & > div:first-child {
-      @include wh(319px, 354px);
-
-      img {
-        object-fit: cover;
-        @include wh(100%, 100%);
-      }
-    }
-
-    & > div:last-child {
-      padding: 0 9px;
-
-      .tip {
-        margin: 14px 0 8px 0;
-        text-align: right;
-        @include sc(11px, #999);
-
-        &:before {
-          content: '';
-          float: left;
-          display: block;
-          height: 1px;
-          width: 163px;
-          margin-left: 4px;
-          margin-top: 6px;
-          background-color: #ddd;
-        }
-      }
-
-      .tipLogin {
-        justify-content: space-between;
-
-        .login_s {
-          @include wh(164px, 54px);
-        }
-
-        #qrcode {
-          @include wh(56px, 56px);
-        }
-      }
-    }
-  }
+@font-face {
+  font-family: 'FZKTJW';
+  src: url('~@/fonts/FZKTJW.TTF');
 }
 
-.modelPopup {
-  background-color: rgba(255, 255, 255, 0);
-  padding-top: 40px;
-
-  /deep/ .van-popup__close-icon {
-    right: 0;
-    top: 0;
-    @include wh(27px, 27px);
-  }
-
-  /deep/ .van-icon__image {
-    @include wh(27px, 27px);
-  }
+@font-face {
+  font-family: 'FZHTJW';
+  src: url('~@/fonts/FZHTJW.TTF');
 }
 </style>

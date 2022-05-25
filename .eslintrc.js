@@ -1,6 +1,6 @@
 /**
  * @module .eslintrc
- * @author: huoyou
+ * @author: liYao
  * @description: eslint配置
  *
  * 所需插件
@@ -65,8 +65,8 @@ module.exports = {
     'no-irregular-whitespace': 1, // 禁止在字符串和注释之外不规则的空白
     'prefer-const': 0, // 要求使用 const 声明那些声明后不再被修改的变量.如果一个变量从不重新分配，使用const声明更好。const 声明告诉读者，“这个变量永远不会被重新分配，”减少认知负荷并提高可维护性。
     'no-use-before-define': 1, // 禁止在变量定义之前使用它们
-    'no-lonely-if': 0, 
-    'vue/no-side-effects-in-computed-properties': 0, 
+    'no-lonely-if': 0,
+    'vue/no-side-effects-in-computed-properties': 0,
     'vue/attributes-order': 2, // vue api使用顺序
     'vue/order-in-components': [
       2,

@@ -19,13 +19,13 @@
         <div class="twoMain-yan-text">点击香烟熄灭它</div>
       </div>
 
-      <div class="three-yanmie"></div>
+      <div class="three-yanmie" @click="setWxSq"></div>
 
       <div class="twoMain-content">
         <p>熄灭香烟，有机会获得独一无二的健康礼包</p>
         <p>
           已有
-          <span>996</span>
+          <span>{{ getUnmber }}</span>
           人参与
         </p>
       </div>
@@ -35,6 +35,7 @@
 
 <script>
 import _utils from '_utils/utils.js';
+import { mapGetters } from 'vuex';
 export default {
   name: 'mainIndex',
   data() {
@@ -43,10 +44,16 @@ export default {
       viewThree: false
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters(['getUnmber'])
+  },
   created() {},
   mounted() {},
   methods: {
+    setWxSq() {
+      // 去唤醒授权
+      this.$emit('setWxSq');
+    },
     next(val) {
       if (val === 1) {
         this.viewMain = false;
@@ -59,10 +66,7 @@ export default {
           this.$toast('请用微信打开本页面进行游戏');
           return;
         }
-
-        setTimeout(() => {
-          this.$emit('setWxSq');
-        }, 1000);
+        this.setWxSq();
       }
     }
   }
@@ -72,12 +76,13 @@ export default {
 <style scoped lang="scss">
 .mainIndex {
   line-height: 25px;
+  position: relative;
   @include sc(16px, #1b170b);
-  @include wh(100wh, 100vh);
+  @include wh(100vw, 100vh);
 
   .fistMain,
   .twoMain {
-    @include wh(100wh, 100vh);
+    @include wh(100vw, 100vh);
   }
 
   .fistMain {
@@ -90,7 +95,7 @@ export default {
 
     &-text {
       padding: 58px 28px 0 28px;
-      font-family: FZKai-Z03S;
+      font-family: 'FZKTJW';
 
       p {
         text-indent: 32px;
@@ -140,6 +145,7 @@ export default {
         position: absolute;
         bottom: 11px;
         right: -16px;
+        font-family: 'FZHTJW';
         @include sc(12px, #fff);
       }
     }
@@ -153,6 +159,7 @@ export default {
       width: 100%;
       text-align: center;
       bottom: 16%;
+      font-family: 'FZHTJW';
       @include sc(13px, #fff);
 
       span {

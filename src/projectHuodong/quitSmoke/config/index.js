@@ -18,8 +18,8 @@ module.exports.config = {
   },
   base: {
     development: '/',
-    test: '/H5/quitSmoke',
-    production: '/H5/quitSmoke'
+    test: '/quitSmoke',
+    production: '/quitSmoke'
   },
   // axios的baseUrl
   baseURL: {
@@ -29,9 +29,9 @@ module.exports.config = {
   },
   // 分享icon
   shareImg: {
-    development: 'https://img.dutenews.com/a/10001/201912/e8a850089b299541e2464bc0ad04e43c.jpg',
-    test: 'https://img.dutenews.com/a/10001/201912/e8a850089b299541e2464bc0ad04e43c.jpg',
-    production: 'https://img.dutenews.com/a/10001/201912/e8a850089b299541e2464bc0ad04e43c.jpg'
+    development: 'https://300w.oss-cn-shenzhen.aliyuncs.com/quitSmoke/quitSmoke_share_icon_img.jpg',
+    test: 'https://300w.oss-cn-shenzhen.aliyuncs.com/quitSmoke/quitSmoke_share_icon_img.jpg',
+    production: 'https://300w.oss-cn-shenzhen.aliyuncs.com/quitSmoke/quitSmoke_share_icon_img.jpg'
   },
   shareWxUrl: {
     //微信授权的接口地址

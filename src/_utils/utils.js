@@ -105,7 +105,7 @@ let util = {
       _that.getWxSignature(url, function (data) {
         wx.config({
           debug: false, // true:调试时候弹窗
-          appId: data.appId || data.appid, // 必填，公众号的唯一标识
+          appId: data.appId || data.appid || 'wxfa0e465fd80ff6e4', // 必填，公众号的唯一标识
           timestamp: data.timestamp, // 必填，生成签名的时间戳
           nonceStr: data.nonceStr || data.noncestr, // 必填，生成签名的随机串
           signature: data.signature, // 必填，签名
@@ -177,7 +177,6 @@ let util = {
     }
   },
   getH5Share(option, url) {
-    // eslint-disable-next-line
     let _that = this;
     let ip = window.location.host; //获取服务器ip地址
     let protocolStr = document.location.protocol; // 协议头
@@ -189,23 +188,29 @@ let util = {
     if (_that.isEquipment().isWeixin) {
       //微信的分享
 
-      let html = `<div id="cover"></div><div id="shareTC"><img src="${shareUrlImg}"></div>`;
+      let html = `<div id="cover"></div><div id="shareTC"><img src="${shareUrlImg}"> <p class="tip">分享后返回可抽</p></div>`;
       document.body.insertAdjacentHTML('beforeend', html);
       let cover = document.getElementById('cover');
       cover.onclick = function () {
         let shareTC = document.getElementById('shareTC');
         this.parentNode.removeChild(this);
         shareTC.parentNode.removeChild(shareTC);
+        option.shareCallback &&
+          typeof option.shareCallback === 'function' &&
+          option.shareCallback();
       };
-      new Promise(function (resolve, reject) {
-        setTimeout(() => {
-          if (document.getElementById('shareTC')) {
-            let shareTC = document.getElementById('shareTC');
-            cover.parentNode.removeChild(cover);
-            shareTC.parentNode.removeChild(shareTC);
-          }
-        }, 3000);
-      });
+
+      if (!option.shareClick) {
+        new Promise(function (resolve, reject) {
+          setTimeout(() => {
+            if (document.getElementById('shareTC')) {
+              let shareTC = document.getElementById('shareTC');
+              cover.parentNode.removeChild(cover);
+              shareTC.parentNode.removeChild(shareTC);
+            }
+          }, 3000);
+        });
+      }
 
       wx.ready(function () {
         var shareData = {

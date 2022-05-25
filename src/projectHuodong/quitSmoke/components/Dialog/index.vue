@@ -24,9 +24,10 @@
         </div>
         <div class="mdcj_h3"></div>
         <div class="mdcj_text">
-          1.每个ID仅限抽取一次，放奖时间：xxxxxx
-          <br />
-          2.我们将会通过微信服务消息以及XXX公众号，公布中奖结果，敬请关注！
+          <p>1、中奖礼品收货地址仅限深圳，填写其他地址将无法发货。</p>
+          <p>2、地址格式为深圳市，XX区，***街道，***路**号，姓名电话。</p>
+          <p>3、本次活动奖品为盲盒形式，产品随机发货。</p>
+          <p>4、开奖日期为世界无烟日5月31日18:00，中奖结果名单将在“健康龙岗”公众号同步公布。</p>
         </div>
 
         <div class="mdcj_close" @click="btnClick('close')"></div>
@@ -149,8 +150,9 @@ export default {
     position: absolute;
     top: 50%;
     left: 50%;
+    font-family: 'FZHTJW';
     transform: translateX(-50%) translateY(-50%);
-    @include wh(281px, 369px);
+    @include wh(281px, 480px);
   }
 
   &_h2 {

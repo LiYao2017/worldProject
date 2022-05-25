@@ -1,6 +1,6 @@
 /*
  * @Description: 自动注册components下的全局组件
- * @Autor: huoyou
+ * @Autor: liYao
  * @Date: 2021-06-07 09:37:22
  * @LastEditTime: 2021-06-08 15:43:23
  */

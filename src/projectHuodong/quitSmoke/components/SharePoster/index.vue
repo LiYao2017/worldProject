@@ -1,8 +1,5 @@
 <template>
   <div v-show="modeImgShare" class="posterMask">
-    <van-loading v-show="process === 1" class="posterLoading" color="#fff" size="24px" vertical>
-      海报生成中
-    </van-loading>
     <div v-show="process === 2" class="poster">
       <img class="poster_poster" :src="posterImg" alt="" srcset="" />
     </div>
@@ -10,6 +7,7 @@
     <div ref="imageWrapperShare" class="poster_canvas">
       <img class="poster_left_top" src="@/assets/images/quitSmoke_lvye.png" alt="" />
       <div class="poster_cent">
+        <!-- <img v-if="getUser.headimgurl" class="poster_avator" :src="picture" alt="" /> -->
         <img class="poster_avator" src="@/assets/images/quitSmoke_nan_icon.png" alt="" />
         <div class="poster_nickname">{{ getUser.nickname }}</div>
         <div class="poster_text">
@@ -17,8 +15,7 @@
           <span class="poster_store">{{ getUnmber }}</span>
           位戒烟倡议者
         </div>
-        <!-- <img class="poster_img" :src="picture" alt="" /> -->
-        <img class="poster_img" src="@/assets/images/quitSmoke_nan_icon.png" alt="" />
+        <img class="poster_img" src="@/assets/images/quitSmoke_yanmie_g.png" alt="" />
         <div class="poster_tip">为了孩子的明天，请戒烟</div>
       </div>
       <div class="poster_footer">
@@ -66,6 +63,10 @@ export default {
   },
   mounted() {},
   methods: {
+    resetPoster() {
+      this.posterImg = '';
+      this.process = 1;
+    },
     qrcode(url) {
       //生成的二维码
       this.shareUrl = this.options.shareUrl || window.location.href;
@@ -82,12 +83,15 @@ export default {
         this.modeImgShare = true;
         return;
       }
-      document.getElementById('qrcodes').innerHTML = '';
+
+      if (document.getElementById('qrcodes').innerHTML === '') {
+        document.getElementById('qrcodes').innerHTML = '';
+        await this.qrcode();
+      }
       this.process = 1;
       this.modeImgShare = true;
-      await this.qrcode();
 
-      // if (this.getUser.headimgurl) {
+      // if (this.getUser.headimgurl && !this.picture) {
       //   await this.getImage(this.getUser.headimgurl);
       //   return;
       // }
@@ -130,6 +134,7 @@ export default {
           let newImageData = canvas.toDataURL('image/jpeg', 1);
           that.posterImg = newImageData;
           that.process = 2;
+          that.$emit('setPoster', 2);
         };
         image.onerror = (e) => {
           console.log('错误', e);
@@ -178,6 +183,8 @@ export default {
   top: 0;
   bottom: 0;
   right: 0;
+  opacity: 0;
+  z-index: 9;
 
   &_poster {
     @include wh(100%);
@@ -189,7 +196,7 @@ export default {
     top: -150%;
     background: #dbecc0;
     line-height: 25px;
-    @include wh(100%);
+    @include wh(375px, 667px);
     @include sc(15px, #3e322e);
   }
 
@@ -206,6 +213,7 @@ export default {
   }
 
   &_avator {
+    border-radius: 50%;
     @include wh(102px, 102px);
   }
 
@@ -223,13 +231,11 @@ export default {
   }
 
   &_footer {
-    position: relative;
+    position: absolute;
+    bottom: 0;
     background-image: url('~@/assets/images/quitSmoke_ditus.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    bottom: 0;
-    left: 0;
-    right: 0;
     @include wh(375px, 319px);
   }
 
@@ -250,6 +256,8 @@ export default {
     background-image: url('~@/assets/images/quitSmoke_sb_icon.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    margin-left: 4px;
+    margin-top: 2px;
     @include wh(69px, 34px);
   }
 }

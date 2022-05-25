@@ -6,6 +6,10 @@
         background-repeat: no-repeat;
         background-size: 100% 163px;
         position: relative;
+        // left: 0;
+        // top: 0;
+        // bottom: 0;
+        // right: 0;
         @include wh(100wh, 100vh);
     }
 
@@ -39,6 +43,7 @@
         top: 228px;
         text-align: center;
         font-weight: 600;
+        font-family: 'FZHTJW';
         @include sc(16px, #3E322E);
     }
 
@@ -54,4 +59,42 @@
         color: #C15858;
     }
 
+    &_opac{
+        opacity: 1 !important;
+    }
+
+    &_poster_tip{
+        text-align: center;
+        margin-top: 56px;
+        font-family: 'FZKTJW';
+        @include sc(13px, #458775);    
+    }
+
+    &_btn_s{
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        margin-top: 19px;
+    }
+
+    &_btn_a{
+        position: relative;
+        z-index: 99;
+        background-image: imgurl('quitSmoke_share_btn.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        cursor: pointer;
+        @include wh(111px,60px);    
+    }
+
+    &_btn_b{
+        position: relative;
+        z-index: 99;
+        background-image: imgurl('quitSmoke_liuyan_btn.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        margin-left: 24px;
+        cursor: pointer;
+        @include wh(111px,32px);    
+    }
 }
