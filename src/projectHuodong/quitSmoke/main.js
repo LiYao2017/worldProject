@@ -10,6 +10,9 @@ import * as filters from '_@/filters';
 import '@/config/vant.js';
 import api from '@/api/common.js';
 
+import VueTouch from 'vue-touch';
+Vue.use(VueTouch, { name: 'v-touch' });
+
 const imgUrl = require(`@/config`).config['imgUrl'][process.env.VUE_APP_MODE];
 Vue.config.productionTip = false;
 Vue.prototype.$api = api;

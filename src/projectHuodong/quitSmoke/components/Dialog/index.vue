@@ -24,10 +24,14 @@
         </div>
         <div class="mdcj_h3"></div>
         <div class="mdcj_text">
-          <p>1、中奖礼品收货地址仅限深圳，填写其他地址将无法发货。</p>
-          <p>2、地址格式为深圳市，XX区，***街道，***路**号，姓名电话。</p>
-          <p>3、本次活动奖品为盲盒形式，产品随机发货。</p>
-          <p>4、开奖日期为世界无烟日5月31日18:00，中奖结果名单将在“健康龙岗”公众号同步公布。</p>
+          <p>
+            1、
+            <b>中奖礼品收货地址仅限深圳,</b>
+            填写其他地址将无法发货
+          </p>
+          <p>2、地址格式为深圳市，XX区,***街道，***路**号，姓名电话</p>
+          <p>3、本次活动奖品为盲盒形式，产品随机发货</p>
+          <p>4、开奖日期为世界无烟日5月31日18:00，中奖结果名单将在“健康龙岗”公众号同步公布</p>
         </div>
 
         <div class="mdcj_close" @click="btnClick('close')"></div>
@@ -148,11 +152,11 @@ export default {
     background: linear-gradient(#dfeac4, #f9fcf1);
     border-radius: 6px;
     position: absolute;
-    top: 50%;
+    top: 47%;
     left: 50%;
     font-family: 'FZHTJW';
     transform: translateX(-50%) translateY(-50%);
-    @include wh(281px, 480px);
+    @include wh(300px, 460px);
   }
 
   &_h2 {
@@ -175,9 +179,10 @@ export default {
   }
 
   &_text {
-    padding: 19px 30px 0 19px;
-    font-family: PingFang SC;
+    padding: 19px 16px 0 20px;
+    font-family: 'FZHTJW';
     line-height: 24px;
+    // text-align: justify;
     @include sc(13px, #453635);
   }
 

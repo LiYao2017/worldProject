@@ -44,15 +44,21 @@
         text-align: center;
         font-weight: 600;
         font-family: 'FZHTJW';
-        @include sc(16px, #3E322E);
+        @include sc(17px, #3E322E);
     }
 
     &_avator {
+        border-radius: 50%;
         @include wh(121px, 121px);
     }
 
-    &_nickname{
+    &_nickname{    
+        font-weight: bold;
         margin: 15px 0 16px 0;
+    }
+    
+    &_text{
+        font-size: 19px;
     }
 
     &_store {

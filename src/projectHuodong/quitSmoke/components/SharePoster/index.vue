@@ -7,8 +7,8 @@
     <div ref="imageWrapperShare" class="poster_canvas">
       <img class="poster_left_top" src="@/assets/images/quitSmoke_lvye.png" alt="" />
       <div class="poster_cent">
-        <!-- <img v-if="getUser.headimgurl" class="poster_avator" :src="picture" alt="" /> -->
-        <img class="poster_avator" src="@/assets/images/quitSmoke_nan_icon.png" alt="" />
+        <img v-if="getUser.headimgurl" class="poster_avator" :src="picture" alt="" />
+        <img v-else class="poster_avator" src="@/assets/images/quitSmoke_nan_icon.png" alt="" />
         <div class="poster_nickname">{{ getUser.nickname }}</div>
         <div class="poster_text">
           我是第
@@ -20,7 +20,9 @@
       </div>
       <div class="poster_footer">
         <div class="poster_qrcode">
-          <div id="qrcodes" class="poster_s"></div>
+          <div class="poster_er">
+            <div id="qrcodes" ref="qrcodes" class="poster_s"></div>
+          </div>
           <img class="poster_s_img" src="@/assets/images/quitSmoke_sb_icon.png" alt="" />
         </div>
       </div>
@@ -70,9 +72,10 @@ export default {
     qrcode(url) {
       //生成的二维码
       this.shareUrl = this.options.shareUrl || window.location.href;
+
       let qrcode = new QRCode('qrcodes', {
-        width: 90,
-        height: 90, // 高度
+        width: this.$refs.qrcodes.offsetWidth || parseInt(window.innerWidth * 0.176),
+        height: this.$refs.qrcodes.offsetHeight || parseInt(window.innerWidth * 0.176), // 高度
         correctLevel: QRCode.CorrectLevel.H,
         text: this.shareUrl // 二维码内容
       });
@@ -91,10 +94,10 @@ export default {
       this.process = 1;
       this.modeImgShare = true;
 
-      // if (this.getUser.headimgurl && !this.picture) {
-      //   await this.getImage(this.getUser.headimgurl);
-      //   return;
-      // }
+      if (this.getUser.headimgurl && !this.picture) {
+        await this.getImage(this.getUser.headimgurl);
+        return;
+      }
 
       setTimeout(() => {
         this.createImg();
@@ -111,7 +114,7 @@ export default {
         backgroundColor: '#dbecc0',
         width: width,
         height: height,
-        scale: window.devicePixelRatio
+        scale: 3
       }).then((canvas) => {
         let imgUrl = canvas.toDataURL();
         let image = new Image();
@@ -242,14 +245,23 @@ export default {
   &_qrcode {
     position: absolute;
     bottom: 10px;
-    right: 46px;
+    right: 12.3%;
   }
 
-  &_s {
+  &_er {
     padding: 5px;
     border-radius: 4px;
     background-color: #fff;
+    box-sizing: border-box;
     @include wh(76px, 76px);
+  }
+
+  &_s {
+    @include wh(100%, 100%);
+
+    /deep/ img {
+      @include wh(100%, 100%);
+    }
   }
 
   &_s_img {

@@ -1,7 +1,7 @@
 <template>
   <div v-if="list.length > 0" class="marquee">
     <ul class="inc" :style="`--marqueeTime--:${marqueeTime}`">
-      <li v-for="(item, ind) in list" :key="ind" class="item">
+      <li v-for="(item, ind) in list" :key="ind" class="item" :class="{ itemMe: item.isme }">
         <span v-text="item.nickname"></span>
         :
         <span v-html="item.liuyan"></span>
@@ -85,6 +85,10 @@ export default {
     .marColor {
       color: #ffff39;
     }
+  }
+
+  .itemMe {
+    background: linear-gradient(270deg, #fdd086, #e49381);
   }
 
   .end-li {

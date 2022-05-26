@@ -4,7 +4,7 @@ const getStorage = (state, name, storage = localStorage) => {
   if (state[name]) {
     return state[name];
   } else {
-    return storage.getItem(`subwayCloneIn_${name}`) || '';
+    return storage.getItem(`quitSmoke_${name}`) || '';
   }
 };
 
@@ -13,7 +13,7 @@ export default {
     if (state.user.nickname) {
       return state.user;
     } else {
-      return localStorage.getItem('subwayCloneIn_user') || {};
+      return localStorage.getItem('quitSmoke_user') || {};
     }
   },
   getLeaveWords(state) {

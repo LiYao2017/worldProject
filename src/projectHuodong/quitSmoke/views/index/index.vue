@@ -93,7 +93,8 @@ export default {
           this.diaOptions.show = false;
           let data = {
             nickname: this.getUser.nickname,
-            liuyan: this.getLeaveWords[ind]
+            liuyan: this.getLeaveWords[ind],
+            isme: true
           };
           this.list.unshift(data);
           this.isPoster = false;
@@ -166,9 +167,15 @@ export default {
       };
       this.$api.wxLogin(data).then((res) => {
         if (res.success) {
+          let defaultImg =
+            res.data.sex === 2
+              ? this.$imgUrl + 'quitSmoke_nv_icon.png'
+              : this.$imgUrl + 'quitSmoke_nan_icon.png';
+          let headImg =
+            (res.data.headimgurl && res.data.headimgurl.replace('/132', '/0')) || defaultImg;
           let user = {
             nickname: res.data.nickname,
-            headimgurl: res.data.headimgurl
+            headimgurl: headImg
           };
           this.SET_USER(user);
           this.restUrl();
