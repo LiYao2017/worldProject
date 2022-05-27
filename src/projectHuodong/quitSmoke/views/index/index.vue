@@ -128,7 +128,7 @@ export default {
           _this.diaOptions.show = true;
         },
         callback: function (e) {
-          console.log('分享', e);
+          console.log('分享 ', e);
         }
       };
 
