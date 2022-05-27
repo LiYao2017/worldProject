@@ -68,7 +68,7 @@ export default {
     wxShare() {
       let option = {
         title: `烟烟一熄，生生不息`,
-        desc: '龙岗神秘网红店开张，快闪一天等您探店',
+        desc: '龙岗神秘杂货店开张，快闪一天等您探店',
         link: '/index'
       };
       _utils.isEquipment().isWeixin && _utils.getLoader(this.$route.fullPath, option);

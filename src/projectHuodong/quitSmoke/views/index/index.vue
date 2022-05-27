@@ -120,7 +120,7 @@ export default {
       let _this = this;
       let option = {
         title: `烟烟一熄，生生不息`,
-        desc: '龙岗神秘网红店开张，快闪一天等您探店',
+        desc: '龙岗神秘杂货店开张，快闪一天等您探店',
         link: '/index',
         shareClick: true,
         shareCallback: function () {
