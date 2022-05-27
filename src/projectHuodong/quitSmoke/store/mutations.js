@@ -11,6 +11,9 @@ const mutations = {
   },
   SET_UNMBER(state, unmber) {
     setStorage(state, 'unmber', unmber, sessionStorage);
+  },
+  SET_SAVEID(state, saveid) {
+    setStorage(state, 'saveid', saveid, sessionStorage);
   }
 };
 

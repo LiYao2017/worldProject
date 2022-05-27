@@ -63,7 +63,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getUser', 'getLeaveWords', 'getUnmber'])
+    ...mapGetters(['getUser', 'getLeaveWords', 'getUnmber', 'getSaveId'])
   },
   created() {
     this.activitytime();
@@ -78,9 +78,10 @@ export default {
     // this.fetchList();
   },
   methods: {
-    ...mapMutations(['SET_USER']),
+    ...mapMutations(['SET_USER', 'SET_SAVEID']),
     actLiuyan(ind) {
       let data = {
+        id: this.getSaveId,
         nickname: this.getUser.nickname,
         headimgurl: this.getUser.headimgurl,
         commentId: ind,
@@ -96,6 +97,7 @@ export default {
             liuyan: this.getLeaveWords[ind],
             isme: true
           };
+          this.SET_SAVEID(res.data.id);
           this.list.unshift(data);
           this.isPoster = false;
           this.$refs.SharePoster.getPoster();

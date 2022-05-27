@@ -98,7 +98,7 @@ export default {
         setTimeout(() => {
           this.isscorllTop = false;
           this.setWxSq();
-        }, 2000);
+        }, 4000);
       }
     }
   }
@@ -135,27 +135,15 @@ export default {
       padding: 50px 28px 0 28px;
       font-family: 'FZKTJW';
       line-height: 28px;
+      height: 0;
+      overflow: hidden;
+      animation: animateOpacity 12s linear forwards;
       @include sc(19px, #1b170b);
 
       p {
-        text-indent: 32px;
+        text-indent: 38px;
         margin-top: 14px;
       }
-    }
-
-    .animateOpacity_1 {
-      opacity: 0;
-      animation: animateOpacity 1s linear forwards;
-    }
-
-    .animateOpacity_2 {
-      opacity: 0;
-      animation: animateOpacity 1s linear 0.6s forwards;
-    }
-
-    .animateOpacity_3 {
-      opacity: 0;
-      animation: animateOpacity 1s linear 1.6s forwards;
     }
 
     &-xiala {
@@ -172,7 +160,7 @@ export default {
 
   .twoMain {
     background-color: rgba(219, 236, 192, 1);
-    background-image: imgurl('quitSmoke_bj.png');
+    background-image: imgurl('quitSmoke_bj.png?v_=1');
     background-position: left bottom;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -188,6 +176,7 @@ export default {
         background-size: 100% 100%;
         position: relative;
         bottom: -4px;
+        left: -19px;
         @include wh(150px, 94px);
       }
 
@@ -232,7 +221,7 @@ export default {
     z-index: 1;
     top: 0;
     opacity: 0;
-    animation: threeOpact 1.5s linear forwards;
+    animation: threeOpact 3s linear forwards;
 
     .twoMain-yan {
       display: none;
@@ -254,11 +243,11 @@ export default {
       &-gai {
         background-image: imgurl('quitSmoke_yanmie_gai.png');
         background-size: 100% 100%;
-        transform: scale(2.2);
+        transform: scale(2.5);
         opacity: 0;
         @include wh(100%, 100%);
 
-        animation: animateYan 0.2s linear 1.5s forwards;
+        animation: animateYan 0.4s linear 2.9s forwards;
       }
     }
   }
@@ -330,21 +319,21 @@ export default {
 
 @keyframes animateOpacity {
   0% {
-    opacity: 0;
+    height: 0;
   }
 
   100% {
-    opacity: 1;
+    height: inherit;
   }
 }
 
 @-webkit-keyframes animateOpacity {
   0% {
-    opacity: 0;
+    height: 0;
   }
 
   100% {
-    opacity: 1;
+    height: inherit;
   }
 }
 

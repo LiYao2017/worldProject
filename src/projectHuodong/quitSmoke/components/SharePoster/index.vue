@@ -19,6 +19,7 @@
         <div class="poster_tip">为了孩子的明天，请戒烟</div>
       </div>
       <div class="poster_footer">
+        <img class="poster_imgs_s" src="@/assets/images/quitSmoke_ditus.png" alt="" />
         <div class="poster_qrcode">
           <div class="poster_er">
             <div id="qrcodes" ref="qrcodes" class="poster_s"></div>
@@ -114,7 +115,7 @@ export default {
         backgroundColor: '#dbecc0',
         width: width,
         height: height,
-        scale: 3
+        scale: window.devicePixelRatio
       }).then((canvas) => {
         let imgUrl = canvas.toDataURL();
         let image = new Image();
@@ -134,7 +135,7 @@ export default {
           //把图片绘制到canvas上面
           context.drawImage(image, 0, 0, canvas.width, canvas.height);
           //压缩图片，获取到新的base64Url
-          let newImageData = canvas.toDataURL('image/jpeg', 1);
+          let newImageData = canvas.toDataURL('image/jpeg', 1.5);
           that.posterImg = newImageData;
           that.process = 2;
           that.$emit('setPoster', 2);
@@ -163,6 +164,7 @@ export default {
       let canvas = document.createElement('canvas');
       canvas.width = img.width;
       canvas.height = img.height;
+      console.log('img.width-->', img.width);
       let ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, img.width, img.height);
       let dataURL = canvas.toDataURL('image/png');
@@ -236,10 +238,16 @@ export default {
   &_footer {
     position: absolute;
     bottom: 0;
-    background-image: url('~@/assets/images/quitSmoke_ditus.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
     @include wh(375px, 319px);
+  }
+
+  &_imgs_s {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    @include wh(100%);
   }
 
   &_qrcode {
