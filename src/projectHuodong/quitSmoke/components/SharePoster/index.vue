@@ -16,7 +16,7 @@
           位戒烟倡议者
         </div>
         <img class="poster_img" src="@/assets/images/quitSmoke_yanmie_g.png" alt="" />
-        <div class="poster_tip">为了孩子的明天，请戒烟</div>
+        <div class="poster_tip" v-html="getLiuyan"></div>
       </div>
       <div class="poster_footer">
         <img class="poster_imgs_s" src="@/assets/images/quitSmoke_ditus.png" alt="" />
@@ -62,7 +62,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getUser', 'getUnmber'])
+    ...mapGetters(['getUser', 'getUnmber', 'getLiuyan'])
   },
   mounted() {},
   methods: {
@@ -233,6 +233,11 @@ export default {
 
   &_tip {
     @include sc(16px, #686b64);
+
+    /deep/ .liuyanIcon {
+      vertical-align: middle;
+      @include wh(20px, 20px);
+    }
   }
 
   &_footer {

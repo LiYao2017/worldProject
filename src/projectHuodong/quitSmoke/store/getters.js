@@ -29,5 +29,8 @@ export default {
   },
   getSaveId(state) {
     return state.saveid;
+  },
+  getLiuyan(state) {
+    return state.liuyan;
   }
 };

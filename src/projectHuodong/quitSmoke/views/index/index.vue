@@ -20,7 +20,9 @@
         </div>
 
         <div class="quitMain_btn_s">
-          <div class="quitMain_btn_a" @click="getShare"></div>
+          <div class="quitMain_btn_a" @click="getShare">
+            <div class="quitMain_btn_a_text">可抽奖哦～</div>
+          </div>
           <div class="quitMain_btn_b" @click="setLiuyan"></div>
         </div>
       </div>
@@ -78,7 +80,7 @@ export default {
     // this.fetchList();
   },
   methods: {
-    ...mapMutations(['SET_USER', 'SET_SAVEID']),
+    ...mapMutations(['SET_USER', 'SET_SAVEID', 'SET_LIUYAN']),
     actLiuyan(ind) {
       let data = {
         id: this.getSaveId,
@@ -97,6 +99,7 @@ export default {
             liuyan: this.getLeaveWords[ind],
             isme: true
           };
+          this.SET_LIUYAN(this.getLeaveWords[ind]);
           this.SET_SAVEID(res.data.id);
           this.list.unshift(data);
           this.isPoster = false;

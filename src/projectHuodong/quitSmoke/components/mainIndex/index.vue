@@ -137,6 +137,7 @@ export default {
       line-height: 28px;
       height: 0;
       overflow: hidden;
+      text-align: justify;
       animation: animateOpacity 12s linear forwards;
       @include sc(19px, #1b170b);
 

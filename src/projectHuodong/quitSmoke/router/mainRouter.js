@@ -2,7 +2,7 @@ export default [
   {
     path: '/',
     meta: {
-      title: '戒烟杂货店'
+      title: '解烟杂货店'
     },
     redirect: '/index'
   },
@@ -10,7 +10,7 @@ export default [
     path: '/index',
     name: 'index',
     meta: {
-      title: '戒烟杂货店'
+      title: '解烟杂货店'
     },
     component: () => import('@/views/index/index.vue')
   },

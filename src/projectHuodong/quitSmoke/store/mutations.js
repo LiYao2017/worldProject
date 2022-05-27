@@ -14,6 +14,9 @@ const mutations = {
   },
   SET_SAVEID(state, saveid) {
     setStorage(state, 'saveid', saveid, sessionStorage);
+  },
+  SET_LIUYAN(state, liuyan) {
+    setStorage(state, 'liuyan', liuyan, sessionStorage);
   }
 };
 
