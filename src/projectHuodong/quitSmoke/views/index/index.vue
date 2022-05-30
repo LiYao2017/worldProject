@@ -124,16 +124,18 @@ export default {
         link: '/index',
         shareClick: true,
         shareCallback: function () {
-          if (_utils.isEquipment().isIOS) {
-            _this.diaOptions.drawState = 2;
-            _this.diaOptions.show = true;
-            return;
-          }
+          _this.diaOptions.drawState = 2;
+          _this.diaOptions.show = true;
 
-          if (window.returnCitySN['cname'] && window.returnCitySN['cname'].includes('深圳市')) {
-            _this.diaOptions.drawState = 2;
-            _this.diaOptions.show = true;
-          }
+          // if (_utils.isEquipment().isIOS) {
+          //   _this.diaOptions.drawState = 2;
+          //   _this.diaOptions.show = true;
+          //   return;
+          // }
+          // if (window.returnCitySN['cname'] && window.returnCitySN['cname'].includes('深圳市')) {
+          //   _this.diaOptions.drawState = 2;
+          //   _this.diaOptions.show = true;
+          // }
         },
         callback: function (e) {
           console.log('分享', e);
