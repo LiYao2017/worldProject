@@ -1,146 +1,148 @@
-.quitMain{
-    &_cent{
-        background-color: #dbecc0;
-        background-image: imgurl('quitSmoke_bg_ottom.png');
-        background-position: left bottom;
-        background-repeat: no-repeat;
-        background-size: 100% 163px;
-        position: relative;
-        // left: 0;
-        // top: 0;
-        // bottom: 0;
-        // right: 0;
-        @include wh(100wh, 100vh);
+.quitMain {
+  &_cent {
+    background-color: #dbecc0;
+    background-image: imgurl('quitSmoke_bg_ottom.png');
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 163px;
+    position: relative;
+    // left: 0;
+    // top: 0;
+    // bottom: 0;
+    // right: 0;
+    @include wh(100wh, 100vh);
+  }
+
+  &_que {
+    top: 8%;
+    z-index: 9;
+    bottom: inherit;
+
+    &_2 {
+      top: calc(8% + 33px);
+      z-index: 9;
+      bottom: inherit;
     }
 
-    &_que {
-        top: 8%;
-        z-index: 9;
-        bottom: inherit;
-
-        &_2 {
-            top: calc(8% + 33px);
-            z-index: 9;
-            bottom: inherit;
-        }
-
-        &_3 {
-            top: calc(8% + 66px);
-            z-index: 9;
-            bottom: inherit;
-        }
-
-        &_4 {
-            top: calc(8% + 99px);
-            z-index: 9;
-            bottom: inherit;
-        }
+    &_3 {
+      top: calc(8% + 66px);
+      z-index: 9;
+      bottom: inherit;
     }
 
-    &_cent_s {
-        position: absolute;
-        width: 100%;
-        top: 228px;
-        text-align: center;
-        font-family: 'FZHTJW';
-        @include sc(17px, #3E322E);
+    &_4 {
+      top: calc(8% + 99px);
+      z-index: 9;
+      bottom: inherit;
     }
+  }
 
-    &_avator {
-        border-radius: 50%;
-        @include wh(121px, 121px);
-    }
+  &_cent_s {
+    position: absolute;
+    width: 100%;
+    top: 228px;
+    text-align: center;
+    font-family: 'FZHTJW';
+    @include sc(17px, #3e322e);
+  }
 
-    &_nickname{    
-        font-weight: bold;
-        margin: 15px 0 16px 0;
-    }
-    
-    &_text{
-        font-size: 19px;
-    }
+  &_avator {
+    border-radius: 50%;
+    @include wh(121px, 121px);
+  }
 
-    &_store {
-        color: #C15858;
-    }
+  &_nickname {
+    font-weight: bold;
+    margin: 15px 0 16px 0;
+  }
 
-    &_opac{
-        opacity: 1 !important;
-    }
+  &_text {
+    font-size: 19px;
+  }
 
-    &_poster_tip{
-        text-align: center;
-        margin-top: 56px;
-        font-family: 'FZKTJW';
-        @include sc(15px, #458775);    
-    }
+  &_store {
+    color: #c15858;
+  }
 
-    &_btn_s{
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        margin-top: 19px;
-    }
+  &_opac {
+    opacity: 1 !important;
+  }
 
-    &_btn_a{
-        position: relative;
-        z-index: 99;
-        background-image: imgurl('quitSmoke_share_btn.png');
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        cursor: pointer;
-        @include wh(111px,60px);    
-        
-        &_text{
-            position: absolute;
-            left: 42px;
-            top: 10px;
-            width: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-align: left;
-            @include sc(13px,#3E322E);  
+  &_poster_tip {
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 40px;
+    font-family: 'FZKTJW';
+    text-shadow: rgba(00, 00, 00, 0.2) 1px 1px 1px;
+    @include sc(19px, #458775);
+  }
 
-            animation: animateText 3s linear infinite;
-        }
-    }
+  &_btn_s {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: 19px;
+  }
 
-    &_btn_b{
-        position: relative;
-        z-index: 99;
-        background-image: imgurl('quitSmoke_liuyan_btn.png');
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        margin-left: 24px;
-        cursor: pointer;
-        @include wh(111px,32px);    
+  &_btn_a {
+    position: relative;
+    z-index: 99;
+    background-image: imgurl('quitSmoke_share_btn.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+    @include wh(111px, 60px);
+
+    &_text {
+      position: absolute;
+      left: 42px;
+      top: 10px;
+      width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-align: left;
+      @include sc(13px, #3e322e);
+
+      animation: animateText 3s linear infinite;
     }
+  }
+
+  &_btn_b {
+    position: relative;
+    z-index: 99;
+    background-image: imgurl('quitSmoke_liuyan_btn.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin-left: 24px;
+    cursor: pointer;
+    @include wh(111px, 32px);
+  }
 }
 
 @keyframes animateText {
-    0%{
-        width: 0;
-    }
-
-    66%{
-        width: 70px;
-    }
-
-    100% {
-        width: 70px;
-    }
+  0% {
+    width: 0;
   }
-  
-  @-webkit-keyframes animateText {
-    0%{
-        width: 0;
-    }
 
-    66%{
-        width: 70px;
-    }
-
-    100% {
-        width: 70px;
-    }
+  66% {
+    width: 70px;
   }
+
+  100% {
+    width: 70px;
+  }
+}
+
+@-webkit-keyframes animateText {
+  0% {
+    width: 0;
+  }
+
+  66% {
+    width: 70px;
+  }
+
+  100% {
+    width: 70px;
+  }
+}

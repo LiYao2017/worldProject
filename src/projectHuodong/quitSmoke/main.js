@@ -11,7 +11,9 @@ import '@/config/vant.js';
 import api from '@/api/common.js';
 
 import VueTouch from 'vue-touch';
+import vuescroll from 'vuescroll';
 Vue.use(VueTouch, { name: 'v-touch' });
+Vue.use(vuescroll);
 
 const imgUrl = require(`@/config`).config['imgUrl'][process.env.VUE_APP_MODE];
 Vue.config.productionTip = false;

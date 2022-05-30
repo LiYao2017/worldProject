@@ -2,7 +2,7 @@ module.exports.config = {
   timeout: 60000, // axios超时时间
   homePage: '/', // 项目首页路径
   publicPath: './',
-  outputDir: 'dist/quitSmoke', // 打包输出名称
+  outputDir: 'dist/quitSmoke-h5', // 打包输出名称
   isGizp: true,
   isAnalyze: false,
   isCDN: false,
@@ -18,12 +18,12 @@ module.exports.config = {
   },
   base: {
     development: '/',
-    test: '/quitSmoke',
-    production: '/quitSmoke'
+    test: '/quitSmoke-h5',
+    production: '/quitSmoke-h5'
   },
   // axios的baseUrl
   baseURL: {
-    development: 'http://172.20.109.155:7150',
+    development: 'https://www.lq214xh.top',
     test: 'https://www.lq214xh.top',
     production: 'https://www.lq214xh.top'
   },
@@ -48,14 +48,14 @@ module.exports.config = {
   isvConsole: true,
   devServer: {
     open: false, // 自动打开浏览器
-    port: 9090,
+    port: 8080,
     https: false,
     proxy: {
-      '/meas': {
-        target: 'https://activity.szdute.cn',
+      '/pconline-s': {
+        target: 'http://whois.pconline.com.cn',
         changeOrigin: true,
         pathRewrite: {
-          '^/meas': ''
+          '^/pconline-s': ''
         }
       }
     }

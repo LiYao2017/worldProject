@@ -30,5 +30,8 @@ export default {
   },
   getIncreasing() {
     return http.get('/activity/api/increasing');
+  },
+  getdizhi() {
+    return http.get('http://pv.sohu.com/cityjson?ie=utf-8');
   }
 };

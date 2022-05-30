@@ -6,16 +6,20 @@
       :class="{ scorllTop: isscorllTop }"
       @swipeup="swiperup"
     >
-      <div class="fistMain-text">
-        <p class="animateOpacity_1">
-          据说每年在六一儿童节的前一天，深圳市龙岗区某处会出现一家神奇的“杂货店”，店门口的布告栏上张贴着一个又一个的戒烟故事。
-        </p>
-        <p class="animateOpacity_2">
-          听说店主年轻时曾因吸烟令自己的生活受到了很大影响，戒除“烟瘾”后，他想通过自己的故事，帮助更多像他一样的人成功戒烟，让更多人能够了解烟草的危害而避免吸烟。
-        </p>
-        <p class="animateOpacity_3">
-          越来越多吸烟者因此成功戒烟，也将自己的故事也留在布告栏上帮助别人…
-        </p>
+      <div class="fistMain-text _noScroll_">
+        <vue-scroll :ops="ops" @handle-resize="handleResize">
+          <div class="fistMain-text-scoll _noScroll_">
+            <p class="_noScroll_">
+              据说每年在六一儿童节的前一天，深圳市龙岗区某处会出现一家神奇的“杂货店”，店门口的布告栏上张贴着一个又一个的戒烟故事。
+            </p>
+            <p class="_noScroll_">
+              听说店主年轻时曾因吸烟令自己的生活受到了很大影响，戒除“烟瘾”后，他想通过自己的故事，帮助更多像他一样的人成功戒烟，让更多人能够了解烟草的危害而避免吸烟。
+            </p>
+            <p class="_noScroll_">
+              越来越多吸烟者因此成功戒烟，也将自己的故事也留在布告栏上帮助别人…
+            </p>
+          </div>
+        </vue-scroll>
       </div>
       <div class="fistMain-xiala" @click="next(1)"></div>
     </v-touch>
@@ -62,7 +66,35 @@ export default {
     return {
       viewMain: true,
       isscorllTop: false,
-      viewThree: false
+      viewThree: false,
+      ops: {
+        vuescroll: {
+          detectResize: true,
+          locking: true
+        },
+        scrollPanel: {
+          scrollingX: false,
+          scrollingY: true
+        },
+        rail: {
+          background: 'rgba(178 225 105,0.5)',
+          opacity: 1,
+          size: '6px',
+          specifyBorderRadius: false,
+          gutterOfEnds: null,
+          gutterOfSide: '2px',
+          border: '1px solid 1px solid rgb(199 213 176)',
+          keepShow: true
+        },
+        bar: {
+          hoverStyle: true,
+          onlyShowBarOnScroll: false, //是否只有滚动的时候才显示滚动条
+          background: 'rgb(178 225 105)', //滚动条颜色
+          opacity: 1, //滚动条透明度
+          'overflow-x': 'hidden'
+        },
+        videoData: []
+      }
     };
   },
   computed: {
@@ -71,6 +103,9 @@ export default {
   created() {},
   mounted() {},
   methods: {
+    handleResize(vertical, horizontal, nativeEvent) {
+      console.log(nativeEvent);
+    },
     swiperup() {
       this.isscorllTop = true;
       setTimeout(() => {
@@ -132,30 +167,43 @@ export default {
     z-index: 1;
 
     &-text {
-      padding: 50px 28px 0 28px;
+      margin: 0 18px 0 28px;
       font-family: 'FZKTJW';
       line-height: 28px;
-      height: 0;
-      overflow: hidden;
+      height: calc(100% - 276px);
+      overflow: scroll;
       text-align: justify;
-      animation: animateOpacity 12s linear forwards;
+      box-sizing: border-box;
+      margin-top: 30px;
       @include sc(19px, #1b170b);
+
+      /deep/ .__rail-is-horizontal {
+        display: none;
+      }
+
+      &-scoll {
+        overflow: hidden;
+        height: 375px;
+        // animation: animateOpacity 12s linear forwards;
+      }
 
       p {
         text-indent: 38px;
-        margin-top: 14px;
+        margin-bottom: 14px;
+        padding-right: 10px;
       }
     }
 
     &-xiala {
       position: absolute;
       background-image: imgurl('quitSmoke_xiala.png');
-      background-size: 100% 100%;
+      background-size: 100%;
+      background-repeat: repeat;
       cursor: pointer;
-      bottom: 13px;
-      left: calc(50% - 15px);
+      bottom: 180px;
+      left: calc(50% - 25px);
       animation: breathe 1s linear infinite;
-      @include wh(30px, 30px);
+      @include wh(50px, 50px);
     }
   }
 
@@ -256,37 +304,37 @@ export default {
 
 @keyframes breathe {
   0% {
-    bottom: 13px;
+    bottom: 240px;
   }
 
   25% {
-    bottom: 18px;
+    bottom: 246px;
   }
 
   75% {
-    bottom: 6px;
+    bottom: 234px;
   }
 
   100% {
-    bottom: 13px;
+    bottom: 240px;
   }
 }
 
 @-webkit-keyframes breathe {
   0% {
-    bottom: 13px;
+    bottom: 240px;
   }
 
   25% {
-    bottom: 18px;
+    bottom: 246px;
   }
 
   75% {
-    bottom: 6px;
+    bottom: 234px;
   }
 
   100% {
-    bottom: 13px;
+    bottom: 240px;
   }
 }
 
@@ -324,7 +372,7 @@ export default {
   }
 
   100% {
-    height: inherit;
+    height: 375px;
   }
 }
 
@@ -334,7 +382,7 @@ export default {
   }
 
   100% {
-    height: inherit;
+    height: 375px;
   }
 }
 

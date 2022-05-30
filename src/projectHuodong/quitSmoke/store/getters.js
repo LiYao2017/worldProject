@@ -4,7 +4,7 @@ const getStorage = (state, name, storage = localStorage) => {
   if (state[name]) {
     return state[name];
   } else {
-    return storage.getItem(`quitSmoke_${name}`) || '';
+    return storage.getItem(`quitSmoke-h5_${name}`) || '';
   }
 };
 
@@ -14,7 +14,7 @@ export default {
       state.user.headimgurl = state.user.headimgurl.replace('/132', '/0');
       return state.user;
     } else {
-      let user = localStorage.getItem('quitSmoke_user');
+      let user = localStorage.getItem('quitSmoke-h5_user');
       if (user && user.nickname) {
         user.headimgurl = (user.headimgurl && user.headimgurl.replace('/132', '/0')) || '';
       }
