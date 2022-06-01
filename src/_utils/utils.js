@@ -188,7 +188,7 @@ let util = {
     if (_that.isEquipment().isWeixin) {
       //微信的分享
 
-      let html = `<div id="cover"></div><div id="shareTC"><img src="${shareUrlImg}"> <p class="tip">分享后返回可抽</p></div>`;
+      let html = `<div id="cover"></div><div id="shareTC"><img src="${shareUrlImg}"> <p class="tip"></p></div>`;
       document.body.insertAdjacentHTML('beforeend', html);
       let cover = document.getElementById('cover');
       cover.onclick = function () {

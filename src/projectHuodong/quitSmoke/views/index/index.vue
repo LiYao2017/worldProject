@@ -21,7 +21,7 @@
 
         <div class="quitMain_btn_s">
           <div class="quitMain_btn_a" @click="getShare">
-            <div class="quitMain_btn_a_text">可抽奖哦～</div>
+            <div class="quitMain_btn_a_text"></div>
           </div>
           <div class="quitMain_btn_b" @click="setLiuyan"></div>
         </div>
